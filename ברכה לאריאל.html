@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>מזל טוב אריאל!</title>
+
+<style>
+body{
+    margin:0;
+    overflow:hidden;
+    background:#0489f5;
+    font-family:Arial,sans-serif;
+    color:white;
+    transition:background 1s;
+}
+
+#title{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    z-index:10;
+}
+
+h1{
+    font-size:60px;
+    margin:0;
+    animation: glow 1s infinite alternate;
+}
+
+p{
+    font-size:28px;
+}
+
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+}
+
+@keyframes glow{
+    from{
+        text-shadow:0 0 10px yellow;
+    }
+    to{
+        text-shadow:0 0 30px gold;
+    }
+}
+
+@keyframes fly{
+    from{
+        transform:translateY(0) rotate(0deg);
+        opacity:1;
+    }
+
+    to{
+        transform:translateY(-110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+
+<div id="title">
+
+<h1>🎉 מזל טוב אריאל! 🎉</h1>
+
+<p>🎂 היום בן 16!!!! 🎂</p>
+
+<h2>
+אריאל היקר,<br><br>
+
+מאחל לך יום הולדת שמח! 🎉<br>
+הרבה בריאות, אושר, הצלחה ושמחה.<br>
+שתמיד תחייך, תגשים את החלומות שלך<br>
+ותהנה מכל רגע בחיים. ⭐<br><br>
+
+אוהב אותך מאוד ❤️<br>
+מאיתן
+</h2>
+
+</div>
+
+
+<canvas id="fireworks"></canvas>
+
+
+<script>
+
+// 🎆 זיקוקים
+
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+
+let particles=[];
+
+
+function createFirework(){
+
+const x=Math.random()*canvas.width;
+const y=Math.random()*canvas.height/2;
+
+
+for(let i=0;i<80;i++){
+
+particles.push({
+
+x:x,
+y:y,
+
+dx:(Math.random()-0.5)*8,
+dy:(Math.random()-0.5)*8,
+
+life:100
+
+});
+
+}
+
+}
+
+
+function animate(){
+
+ctx.fillStyle="rgba(0,0,0,0.2)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+
+particles.forEach((p,index)=>{
+
+p.x+=p.dx;
+p.y+=p.dy;
+p.life--;
+
+
+ctx.beginPath();
+
+ctx.arc(p.x,p.y,3,0,Math.PI*2);
+
+ctx.fillStyle=
+`hsl(${Math.random()*360},100%,60%)`;
+
+ctx.fill();
+
+
+if(p.life<=0){
+particles.splice(index,1);
+}
+
+});
+
+
+requestAnimationFrame(animate);
+
+}
+
+
+setInterval(createFirework,800);
+
+animate();
+
+
+
+// 🎨 צבעים מתחלפים
+
+const colors=[
+"#0489f5",
+"#ff4d6d",
+"#8338ec",
+"#06d6a0",
+"#ffbe0b"
+];
+
+let colorIndex=0;
+
+
+setInterval(()=>{
+
+document.body.style.background=
+colors[colorIndex];
+
+colorIndex++;
+
+if(colorIndex>=colors.length){
+colorIndex=0;
+}
+
+},1500);
+
+
+
+// 😀 אימוג'ים עפים
+
+const emojis=[
+"😀",
+"😂",
+"🤩",
+"🎉",
+"😜",
+"🥳",
+];
+
+
+function createEmoji(){
+
+const emoji=document.createElement("div");
+
+emoji.innerHTML=
+emojis[Math.floor(Math.random()*emojis.length)];
+
+
+emoji.style.position="fixed";
+emoji.style.left=Math.random()*100+"vw";
+emoji.style.bottom="-50px";
+emoji.style.fontSize="40px";
+emoji.style.zIndex="20";
+emoji.style.animation="fly 5s linear";
+
+
+document.body.appendChild(emoji);
+
+
+setTimeout(()=>{
+
+emoji.remove();
+
+},5000);
+
+}
+
+
+setInterval(createEmoji,500);
+
+
+
+// 📱 שינוי גודל מסך
+
+window.addEventListener("resize",()=>{
+
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+
+});
+
+
+</script>
+<img src="imagesARIEL.png" alt="ARIEL"/>
+
+</body>
+</html>S
